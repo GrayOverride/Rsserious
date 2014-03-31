@@ -1,13 +1,8 @@
 
 
-<p>Find me in app/views/public/index.html.erb</p>
-
-
-<% @feeds.each do |feed| %>
-	<% feed.entries.each do |rss| %>
-	<%= rss.title %>
-	<%#=raw rss.inspect %>	
-
-	<% end %>
-<% end %>
-<!-- <script src="http://www.reddit.com/r/webdev.embed?limit=20&t=all" type="text/javascript"></script> -->
+  <% for entry in FeedEntry.all(:limit => 10, :order => "published_at desc") %>
+    <li><%= link_to h(entry.title), entry.url %>
+    <%=raw entry.summary %>
+    </li>
+  <% end %>
+<script src="http://www.reddit.com/r/webdev.embed?limit=20&t=all" type="text/javascript"></script>
