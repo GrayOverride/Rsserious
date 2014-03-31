@@ -1,8 +1,99 @@
-<% @feeds %>
+<%#= @feeds.inspect %>
+<!doctype HTML>
+<html>
+<head>
+	<title>Digital Aggregator</title>
+	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
+	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  	<%= csrf_meta_tags %>
+</head>
 
-  <% for entry in FeedEntry.all(:limit => 10, :order => "published_at desc") %>
-    <li><%= link_to h(entry.title), entry.url %>
-    <%=raw entry.summary %>
-    </li>
-  <% end %>
-<script src="http://www.reddit.com/r/webdev.embed?limit=20&t=all" type="text/javascript"></script>
+<body>
+
+<div class="container">
+
+	<header id="header">
+		<div class="site-logo">RWD Template</div>
+		<nav id="nav">
+		  <ul>
+			<li class="menu-btn"><a href="#">&nbsp;</a></li>
+			<li><a href="#">Tech</a></li>
+			<li><a href="#">Web</a></li>
+			<li><a href="#">National</a></li>
+		  </ul>
+		</nav>
+		<div class="clear"></div>
+	</header>
+	  
+	<section id="content">
+
+		<div class="column padded desktop-span60 mobile-span100">
+
+			<h1 class="title">Main News</h1>
+			
+
+							
+
+			<% @feeds.each do |url, feed| %>
+				 <% feed.entries[0,10].each_with_index do |item, entry, index| %>
+				 <article class="paddedx2">
+				<h2><%= link_to (item.title), item.url %></h2>
+				<h4><%=raw item.summary %></h4>
+				
+				<p><%=raw item.content %></p>
+				<p>Posted <%= item.published %></p>
+				</article>
+				 
+				 <% end %>
+			<% end %>
+
+
+
+		</div>
+
+		<div class="column padded desktop-span20 mobile-span100">
+
+			<h1 class="title">Slim Sidebar</h1>				
+
+			<article class="paddedx2">
+				
+				<h2>Reddit</h2>
+				<h3>webdev</h3>
+				<script src="http://www.reddit.com/r/webdev.embed?limit=20&t=all" type="text/javascript"></script>
+
+			</article>
+
+		</div>
+
+		<div class="column padded desktop-span20 mobile-span100">
+				
+			<h1 class="title">Bonus Sidebar</h1>
+			
+
+			<article class="paddedx2">
+				
+				<h2>Reddit</h2>
+				<h3>frontpage</h3>
+				<script src="http://www.reddit.com/hot/.embed?limit=20&t=all" type="text/javascript"></script>
+
+
+			</article>
+
+		</div>
+
+		<div class="clear"></div>
+
+	</section>
+	  
+	<footer id="footer" class="padded">
+		<p>This is a footer</p>
+	</footer>
+
+</div>
+
+</body>
+</html>
+
+</body>
+</html>
