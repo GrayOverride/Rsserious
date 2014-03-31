@@ -1,0 +1,1 @@
+feed = Feedjira::Feed.fetch_and_parse('file:///home/feedzirra/examples/feed.rss')
