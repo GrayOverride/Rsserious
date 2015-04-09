@@ -1,5 +1,7 @@
 == README
 
+Simple RSS-news aggregator
+
 TODO:
 youtube
 multipages
